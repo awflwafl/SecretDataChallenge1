@@ -3,7 +3,9 @@ var fs = require('fs')
 var scan = require('./scan')
 
 function read(path) {
-  return fs.readFileSync(path)
+  return new Promise(
+    (resolve) => resolve(fs.readFileSync(path))
+  )
 }
 
 function write(path, report) {
@@ -11,6 +13,7 @@ function write(path, report) {
 }
 
 function deserialize(file) {
+  // CSVtoJSON
   return parse(file)
 }
 
@@ -18,13 +21,56 @@ function serialize(data) {
   return JSON.stringify(data, null, 4)
 }
 
+// Coupled to "csv-parse". Partitions into flat collection of datapoints
+function partition(batch) {
+  // Divide before conquering
+  var headings = batch[0]
+  var rows = batch.slice(1)
+
+  return rows.reduce(
+    function (memo, row, rowIndex) {
+      return memo.concat(
+        row.reduce(
+          function (result, cell, columnIndex) {
+            return result.concat({
+              type: headings[columnIndex],
+              location: {
+                row: rowIndex,
+                column: columnIndex
+              },
+              data: cell,
+            })
+          },
+          []
+        )
+      )
+    },
+    []
+  )
+}
+
+function consolidate(data) {
+  return data
+}
+
+function format(errors) {
+  return {
+    'version': 1,
+    'item-count': 5,
+    'format': 'csv',
+    'errors': errors
+  }
+}
+
 function process(inputFilePath, outputFilePath) {
-  new Promise((resolve) => resolve(inputFilePath))
-    .then(read)
+  read(inputFilePath)
     .then(deserialize)
-    .then(scan)
+    .then(partition)
+    .then(scan)         // Apply Data Point Scanners
+    .then(consolidate)  // Apply Collection Scanners
+    .then(format)
     .then(serialize)
-    .then(write.bind(null, outputFilePath))
+    .then((output) => write(outputFilePath, output))
 }
 
 process('./data/unsafe-data-1.csv', 'unsafe-data-1-reports.json')
