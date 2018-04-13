@@ -1,25 +1,8 @@
-var networkScan = require('./network/index.js')
-var uuidScan = require('./uuid/index.js')
+var tenon = require('../tenon')
 
-// Join sub-scanners to create a composite.
-function join(scanners) {
-  return function (data) {
-    // Promise completion of all sub-scanners then join their results
-    return Promise.all(
-      scanners.map(
-        (scan) => new Promise(
-          (resolve) => resolve(scan(data))
-        )
-      )
-    )
-    .then(
-      (results) => results.reduce(
-        (memo, flags) => memo.concat(flags)
-      )
-    )
-  }
-}
+var networkScan = require('./network')
+var uuidScan = require('./uuid')
 
 module.exports = function (data) {
-  return join([networkScan, uuidScan])(data)
+  return tenon.join([networkScan, uuidScan])(data)
 }

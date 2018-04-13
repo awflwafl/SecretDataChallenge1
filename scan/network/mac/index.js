@@ -33,9 +33,11 @@ function flag(datum) {
 
 module.exports = function ({ data }) {
   return new Promise(
-    (resolve) => data.reduce(
-      (flags, datum) => test(datum) ? flags.concat(flag(datum)) : flags,
-      []
+    (resolve) => resolve(
+      data.reduce(
+        (flags, datum) => test(datum) ? flags.concat(flag(datum)) : flags,
+        []
+      )
     )
   )
 }
