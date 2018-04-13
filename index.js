@@ -2,6 +2,7 @@ var io = require('./io')
 var csv = require('./csv')
 var json = require('./json')
 var scan = require('./scan')
+var cli = require('./cli')
 
 function process(inputFilePath, outputFilePath) {
   io.read(inputFilePath)
@@ -11,5 +12,4 @@ function process(inputFilePath, outputFilePath) {
     .then((output) => io.write(outputFilePath, output))
 }
 
-process('./data/unsafe-data-1.csv', 'unsafe-data-1-reports.json')
-process('./data/unsafe-data-2.csv', 'unsafe-data-2-reports.json')
+cli(process)
