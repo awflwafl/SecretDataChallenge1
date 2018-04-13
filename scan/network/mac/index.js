@@ -24,7 +24,6 @@ function flag(datum) {
   return {
     code: 'mac-address-inferred',
     message: explain(datum),
-    content: datum.data,
     item: {
       itemType: datum.itemType,
       location: datum.location
