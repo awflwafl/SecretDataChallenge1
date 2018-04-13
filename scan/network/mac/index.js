@@ -31,10 +31,11 @@ function flag(datum) {
   }
 }
 
-// TODO: Promise API
 module.exports = function ({ data }) {
-  return data.reduce(
-    (flags, datum) => test(datum) ? flags.concat(flag(datum)) : flags,
-    []
+  return new Promise(
+    (resolve) => data.reduce(
+      (flags, datum) => test(datum) ? flags.concat(flag(datum)) : flags,
+      []
+    )
   )
 }
