@@ -34,6 +34,7 @@ function partition(batch) {
           function (result, cell, columnIndex) {
             return result.concat({
               type: headings[columnIndex],
+              itemType: 'cell',
               location: {
                 row: rowIndex,
                 column: columnIndex
@@ -56,12 +57,13 @@ function consolidate(data) {
 function format(errors) {
   return {
     'version': 1,
-    'item-count': 5,
+    'item-count': 5, // oops! fix this
     'format': 'csv',
     'errors': errors
   }
 }
 
+// Schema adherence may be validates as part of this process
 function process(inputFilePath, outputFilePath) {
   read(inputFilePath)
     .then(deserialize)

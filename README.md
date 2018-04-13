@@ -2,6 +2,8 @@
 
 This collection of processors will focus on confirming digital identities.
 
+The strategy is human computer collaboration, as inspired by Garry Kasparov's wisdom about the best way we can coexist with intelligent automated logic.
+
 ## Types of Analysis/Sanners
 
 - Identifier (single data point [IP address])
