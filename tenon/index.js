@@ -2,7 +2,6 @@
 function join(scanners) {
   return function (data) {
     // Promise completion of all sub-scanners then join their results
-    scanners.forEach(console.log)
     return Promise.all(
       scanners.map(
         (scan) => new Promise(
