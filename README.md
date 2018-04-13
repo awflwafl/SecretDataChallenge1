@@ -5,6 +5,8 @@
 
 > An architrave is the lintel or beam that rests on the capitals of the columns. It is an architectural element in Classical architecture.
 
+> A tenon is a projecting piece of wood made for insertion into a mortise in another piece
+
 This collection of processors will focus on confirming digital identities.
 
 The strategy is human computer collaboration, as inspired by Garry Kasparov's wisdom about the best way we can coexist with intelligent automated logic.
