@@ -1,8 +1,8 @@
 var parse = require('csv-parse/lib/sync')
 
-// Split into a flat collection of data points that can be
-// analysed by scanners without reliance on the original format
-// of the data.
+// Split data batch into a flat collection of data points that can be
+// analysed by scanners without reliance on the original format.
+//
 // In other words; divide before conquering.
 function partition(data) {
   var headings = data[0]
