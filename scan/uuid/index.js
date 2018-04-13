@@ -59,7 +59,7 @@ function flag(datum) {
   }
 }
 
-module.exports = function ({ data }) {
+module.exports = function (data) {
   return new Promise(
     (resolve) => resolve(
       data.reduce(

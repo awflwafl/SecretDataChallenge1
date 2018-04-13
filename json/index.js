@@ -2,11 +2,11 @@
 
 // We may have multiple output formats and multiple schemas
 // for each of those.
-function structure(data) {
+function structure({ data, meta }) {
   return {
     'version': 1,
-    'item-count': 5,
-    'format': 'csv',
+    'item-count': meta.itemCount,
+    'format': meta.format,
     'errors': data
   }
 }
@@ -16,9 +16,9 @@ function serialize(data) {
 }
 
 module.exports = {
-  serialize(data) {
+  serialize(results) {
     return new Promise(
-      (resolve) => resolve(serialize(structure(data)))
+      (resolve) => resolve(serialize(structure(results)))
     )
   }
 }

@@ -6,9 +6,9 @@ var parse = require('csv-parse/lib/sync')
 // In other words; divide before conquering.
 function partition(data) {
   var headings = data[0]
-  var rows = data
-    .slice(1)
-    .reduce(
+  var rows = data.slice(1)
+
+  var cells = rows.reduce(
       function (memo, row, rowIndex) {
         return memo.concat(
           row.reduce(
@@ -31,7 +31,7 @@ function partition(data) {
     )
 
   return {
-    data: rows,
+    data: cells,
     meta: {
       format: 'csv',
       itemCount: rows.length
