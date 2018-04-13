@@ -43,11 +43,9 @@ function flag(datum) {
   }
 }
 
-module.exports = {
-  analyse(data) {
+module.exports = function (data) {
     return data.reduce(
       (flags, datum) => test(datum) ? flags.concat(flag(datum)) : flags,
       []
     )
-  }
 }

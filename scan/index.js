@@ -1,5 +1,5 @@
-var { NetworkScanner } = require('./scanners/index.js')
+var networkScan = require('./network/index.js')
 
-module.exports = function scan(batch) {
-  return NetworkScanner.analyse(batch)
+module.exports = function (data) {
+  return networkScan(data)
 }
